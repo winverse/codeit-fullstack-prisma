@@ -19,6 +19,7 @@ async function main() {
   const users = await Promise.all(usersPromises);
 
   // 각 유저가 1-3개의 랜덤 포스트 작성
+  const allPosts = [];
   for (const user of users) {
     const postCount = faker.number.int({ min: 1, max: 3 });
     const postPromises = Array.from({ length: postCount }).map(() =>
@@ -31,7 +32,27 @@ async function main() {
       }),
     );
 
-    await Promise.all(postPromises);
+    const userPosts = await Promise.all(postPromises);
+    allPosts.push(...userPosts);
+  }
+  console.log(`✅ ${allPosts.length}개의 게시글이 생성되었습니다`);
+
+  // 각 게시글에 0-5개의 랜덤 댓글 작성
+  for (const post of allPosts) {
+    const commentCount = faker.number.int({ min: 0, max: 5 });
+    const commentPromises = Array.from({ length: commentCount }).map(() => {
+      const randomUser =
+        users[faker.number.int({ min: 0, max: users.length - 1 })];
+      return prisma.comment.create({
+        data: {
+          content: faker.lorem.sentences({ min: 1, max: 3 }),
+          authorId: randomUser.id,
+          postId: post.id,
+        },
+      });
+    });
+
+    await Promise.all(commentPromises);
   }
 
   console.log(`✅ ${users.length}명의 유저가 생성되었습니다`);
@@ -40,7 +61,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error('❌ 시딩 에러:', e);
+    console.error(e);
     process.exit(1);
   })
   .finally(async () => {
