@@ -1,0 +1,26 @@
+{
+  "name": "07-advanced-queries",
+  "version": "1.0.0",
+  "description": "Prisma 고급 쿼리(필터링, 정렬, 페이지네이션) 데모",
+  "author": "Your Name <your-email@example.com>",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "format": "prettier --write .",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "@prisma/client": "6.16.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "nodemon": "3.1.10",
+    "prettier": "^3.6.2",
+    "prisma": "^6.16.2"
+  }
+}
