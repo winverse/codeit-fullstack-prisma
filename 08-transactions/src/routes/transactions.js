@@ -1,10 +1,10 @@
 import express from 'express';
 import { transactionRepository } from '../repository/transaction.repository.js';
 
-const router = express.Router();
+export const transactionsRouter = express.Router();
 
 // 1. 게시글 + 첫 댓글 동시 생성
-router.post('/posts-with-comment', async (req, res) => {
+transactionsRouter.post('/posts-with-comment', async (req, res) => {
   try {
     const { authorId, title, content, commentContent } = req.body;
 
@@ -31,7 +31,7 @@ router.post('/posts-with-comment', async (req, res) => {
 });
 
 // 2. 안전한 게시글 삭제 (댓글까지 함께)
-router.delete('/posts/:id', async (req, res) => {
+transactionsRouter.delete('/posts/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
 
@@ -56,4 +56,3 @@ router.delete('/posts/:id', async (req, res) => {
   }
 });
 
-export const transactionsRouter = router;
