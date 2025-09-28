@@ -1,0 +1,28 @@
+{
+  "name": "08-transactions",
+  "version": "1.0.0",
+  "description": "Prisma 트랜잭션(transaction) 처리 데모",
+  "author": "Your Name <your-email@example.com>",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "format": "prettier --write .",
+    "seed": "node scripts/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "6.16.2",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "nodemon": "3.1.10",
+    "prettier": "^3.6.2",
+    "prisma": "^6.16.2"
+  }
+}
